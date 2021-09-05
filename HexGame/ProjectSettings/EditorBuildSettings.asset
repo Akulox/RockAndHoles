@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LevelMap.unity
+    guid: 19953ac612a7c4540a995354aba9c536
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/SPOILER - Copy (2).unity
+    guid: 040c1ee1853fed64a8d714081c270f1d
+  - enabled: 1
+    path: Assets/Scenes/SPOILER - Copy (3).unity
+    guid: 950bde3ded712f341bab819eafbf19ed
+  - enabled: 1
+    path: Assets/Scenes/SPOILER - Copy (4).unity
+    guid: 84cdbd763b6d5ed479c855b6b62e7b43
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (5).unity
+    guid: 09db11c0212bc6c45b6bbe74e58a77ab
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (6).unity
+    guid: 3e29ed732e89c5a469fd382422795627
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (7).unity
+    guid: 3178deec29516c14a8dadc2084df8e28
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (8).unity
+    guid: 8ff4c6e26681f0943915eab9a1ecdad1
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (9).unity
+    guid: 11d24f3bf814a5941b1ee6f6c51a2b30
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (10).unity
+    guid: 6dd8cbdba902d6543b34abe4ba065e49
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (11).unity
+    guid: 5a82ee0627007554c8828931cf095550
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (12).unity
+    guid: 706d7ff2c29a9524496944956e7a3efd
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (13).unity
+    guid: 36bc5be6b56f1fd49b09c48cbc11f2da
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (14).unity
+    guid: f015c5adaa11e14468e82fd0589840c6
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (15).unity
+    guid: 4924acc6fe9794b42a850d35dc6c9c6f
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (16).unity
+    guid: 9c92400a11cee124a98d4a52ce4a4e83
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (17).unity
+    guid: f3a7eeeed4a06d34c806a27afde85d36
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (18).unity
+    guid: 45fdad01ca8fc824db2a86a31968c8bc
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (19).unity
+    guid: fdcf3322e1c56f9418c07f9588d7923c
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (20).unity
+    guid: c4e28a044d13a2248a00143ab5851f1a
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (21).unity
+    guid: f013c021d340c054c82cc4b642639ce3
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (22).unity
+    guid: 8058556892e4a01498c262c251fe9481
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (23).unity
+    guid: 065e47524a3ae694e94af6e410facc7e
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (24).unity
+    guid: 78fd32123440bc24695db795284e8608
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (25).unity
+    guid: 942bbae9112b8b74785dda68249d27de
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (26).unity
+    guid: 8fa885391da2c4f4a8f6ac2657355d93
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (27).unity
+    guid: cac42e0afcc1da3498974a4b2ba58ed0
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (28).unity
+    guid: babf57b532fe16c4fb845dee5e8b1e10
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (29).unity
+    guid: dbb0725417c2a714eaa35430a47b4b16
+  - enabled: 0
+    path: Assets/Scenes/SPOILER - Copy (30).unity
+    guid: da3bfaff9ecc51a42b97b1b9dc367ed8
+  m_configObjects: {}
