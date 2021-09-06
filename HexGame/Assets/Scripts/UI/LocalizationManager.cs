@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class LocalizationManager : MonoBehaviour
 {
+    public DataManager dataManager;
+    
     private Dictionary<string, string> localizedText;
 
     public delegate void ChangeLangText();
@@ -15,20 +17,20 @@ public class LocalizationManager : MonoBehaviour
     
     void Awake()
     {
-        DataManager.LoadField();
-        LoadLocalizedText(DataManager.Data.language);
+        dataManager.LoadField();
+        LoadLocalizedText(dataManager.data.language);
     }
     
     public void ChangeLang(string lang)
     {
-        DataManager.Data.language = lang;
-        DataManager.SaveField();
+        dataManager.data.language = lang;
+        dataManager.SaveField();
         LoadLocalizedText(lang);
     }
     public void IsOpen(bool isOpen)
     {
         animator.SetBool("isOpen", isOpen);
-        GameObject.FindGameObjectWithTag("GameStarter")?.GetComponent<GameIntroduce>().LangChosen();
+        if (!dataManager.data.first_dialogue_passed) GameObject.FindGameObjectWithTag("GameStarter").GetComponent<GameIntroduce>().LangChosen();
     }
     public void LoadLocalizedText(string langName)
     {
@@ -48,7 +50,7 @@ public class LocalizationManager : MonoBehaviour
         }
         localizedText = JSONLanguageParser(dataAsJson);
 
-        DataManager.Data.language = langName;
+        dataManager.data.language = langName;
 
         OnLanguageChanged?.Invoke();
     }

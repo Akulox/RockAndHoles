@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class GameIntroduce : MonoBehaviour
 {
+    public DataManager dataManager;
+    
     public Animator lang;
 
     public DialogueTrigger firstDialogue;
     private void Start()
     {
-        if (!DataManager.Data.first_dialogue_passed)
+        if (!dataManager.data.first_dialogue_passed)
         {
             MenuCamera.active = false;
             StartCoroutine(WaitFor(1f, delegate
@@ -32,7 +34,7 @@ public class GameIntroduce : MonoBehaviour
     }
     public void FirstDialoguePassed()
     {
-        DataManager.Data.first_dialogue_passed = true;
-        DataManager.SaveField();
+        dataManager.data.first_dialogue_passed = true;
+        dataManager.SaveField();
     }
 }

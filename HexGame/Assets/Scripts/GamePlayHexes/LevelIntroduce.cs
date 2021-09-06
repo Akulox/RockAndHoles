@@ -9,7 +9,7 @@ public class LevelIntroduce : GameIntroduce
     public Animator joystick;
     private void Start()
     {
-        if (!DataManager.Data.levels[SceneManager.GetActiveScene().buildIndex-1].dialogue_passed)
+        if (!dataManager.data.levels[SceneManager.GetActiveScene().buildIndex-1].dialogue_passed)
         {
             StartCoroutine(WaitFor(0.5f, delegate
             {
@@ -21,8 +21,8 @@ public class LevelIntroduce : GameIntroduce
 
     public void EndLevelIntroduce()
     {
-        DataManager.Data.levels[SceneManager.GetActiveScene().buildIndex-1].dialogue_passed = true;
-        DataManager.SaveField();
+        dataManager.data.levels[SceneManager.GetActiveScene().buildIndex-1].dialogue_passed = true;
+        dataManager.SaveField();
         ToPrepare(true);
     }
 
@@ -35,8 +35,8 @@ public class LevelIntroduce : GameIntroduce
 
     public void StartLevelEnding()
     {
-        DataManager.Data.levels[SceneManager.GetActiveScene().buildIndex-1].level_completed = true;
-        DataManager.SaveField();
+        dataManager.data.levels[SceneManager.GetActiveScene().buildIndex-1].level_completed = true;
+        dataManager.SaveField();
         ToPrepare(false);
         StartCoroutine(WaitFor(0.5f, delegate
         {

@@ -5,34 +5,34 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class DataManager : MonoBehaviour
 {
-    public static Item Data;
-    public static DataManager Instance { get ; private set;}
+    public Item data;
 
     private void Awake()
     {
         LoadField();
     }
     
+    
     [ContextMenu("Save")]
-    public static void SaveField()
+    public void SaveField()
     {
         string path = Application.persistentDataPath + "/DataPlus.json";
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        formatter.Serialize(stream, Data);
+        formatter.Serialize(stream, data);
         stream.Close();
     }
     
     [ContextMenu("Load")]
-    public static void LoadField()
+    public void LoadField()
     {
         string path = Application.persistentDataPath + "/DataPlus.json";
         path = Application.persistentDataPath + "/DataPlus.json";
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Open);
         
-        Data = formatter.Deserialize(stream) as Item;
+        data = formatter.Deserialize(stream) as Item;
         stream.Close();
     }
     
@@ -68,10 +68,10 @@ public class DataManager : MonoBehaviour
     
     public Level FindLevelByName(string requiredLevel)
     {
-        foreach (var level in Data.levels)
+        foreach (var level in data.levels)
         {
             if (requiredLevel == level.name) return level;
         }
-        return null;
+        return data.levels[0];
     }
 }

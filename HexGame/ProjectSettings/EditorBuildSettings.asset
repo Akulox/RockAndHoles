@@ -9,15 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelMap.unity
     guid: 19953ac612a7c4540a995354aba9c536
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/level1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SPOILER - Copy (2).unity
     guid: 040c1ee1853fed64a8d714081c270f1d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SPOILER - Copy (3).unity
     guid: 950bde3ded712f341bab819eafbf19ed
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SPOILER - Copy (4).unity
     guid: 84cdbd763b6d5ed479c855b6b62e7b43
   - enabled: 0

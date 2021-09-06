@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
+    public DataManager dataManager;
+    
     public Animator animator;
     public GameObject sounds;
     public GameObject music;
@@ -14,8 +16,8 @@ public class Settings : MonoBehaviour
 
     private void Start()
     {
-        sounds.GetComponent<Image>().sprite = DataManager.Data.sounds ? soundOn : soundOff;
-        music.GetComponent<Image>().sprite = DataManager.Data.music ? musicOn : musicOff;
+        sounds.GetComponent<Image>().sprite = dataManager.data.sounds ? soundOn : soundOff;
+        music.GetComponent<Image>().sprite = dataManager.data.music ? musicOn : musicOff;
     }
 
     public void SettingsButton()
@@ -30,16 +32,16 @@ public class Settings : MonoBehaviour
     
     public void Sounds()
     {
-        DataManager.Data.sounds = !DataManager.Data.sounds;
-        DataManager.SaveField();
-        sounds.GetComponent<Image>().sprite = DataManager.Data.sounds ? soundOn : soundOff;
+        dataManager.data.sounds = !dataManager.data.sounds;
+        dataManager.SaveField();
+        sounds.GetComponent<Image>().sprite = dataManager.data.sounds ? soundOn : soundOff;
     }
     
     public void Music()
     {
-        DataManager.Data.music = !DataManager.Data.music;
-        DataManager.SaveField();
-        music.GetComponent<Image>().sprite = DataManager.Data.music ? musicOn : musicOff;
+        dataManager.data.music = !dataManager.data.music;
+        dataManager.SaveField();
+        music.GetComponent<Image>().sprite = dataManager.data.music ? musicOn : musicOff;
     }
     
     public void Language(bool opened)

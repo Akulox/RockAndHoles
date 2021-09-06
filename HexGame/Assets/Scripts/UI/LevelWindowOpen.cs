@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class LevelWindowOpen : MonoBehaviour
 {
+    public DataManager dataManager;
+    
     public Sprite levelOpened;
     public Sprite levelClosed;
     public GameObject levelButton;
@@ -22,13 +24,11 @@ public class LevelWindowOpen : MonoBehaviour
         _open = !_open;
         if (_open)
         {
-            currentLevel = DataManager.Instance.FindLevelByName(level);
-            if (level != "")
-            {
-                _levelUnlocked = DataManager.Instance.UnlockedProperties(currentLevel.toUnlock);
-                levelButton.GetComponent<Image>().sprite = _levelUnlocked ? levelOpened : levelClosed;
-                text.text = GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>().GetLocalizedValue(level);
-            }
+            currentLevel = dataManager.FindLevelByName(level);
+            _levelUnlocked = dataManager.UnlockedProperties(currentLevel.toUnlock);
+            levelButton.GetComponent<Image>().sprite = _levelUnlocked ? levelOpened : levelClosed;
+            text.text = GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>().GetLocalizedValue(level);
+            
         }
         animator.SetBool("isOpen", _open);
     }

@@ -7786,6 +7786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e62bd96f84bf74cb75978a235c56f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataManager: {fileID: 1168102572}
   lang: {fileID: 444493987}
   firstDialogue: {fileID: 1389381065}
 --- !u!4 &378415616
@@ -9561,6 +9562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40720499a19f95f488bd01e562745e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataManager: {fileID: 1168102572}
   animator: {fileID: 444493987}
 --- !u!114 &444493990
 MonoBehaviour:
@@ -12823,6 +12825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6a514b2eb604043a47e94e3751eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataManager: {fileID: 1168102572}
   levelOpened: {fileID: 21300000, guid: c455de2bc5e2bc24bade4b1b0207204e, type: 3}
   levelClosed: {fileID: 21300000, guid: 5c110f68fe214b141a96b9653f8f9fa8, type: 3}
   levelButton: {fileID: 1799144029}
@@ -23655,6 +23658,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad82bbd6f37913041a6c18c3848121f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    language: ru_RU
+    noAds: 0
+    sounds: 1
+    music: 1
+    first_dialogue_passed: 0
+    levels:
+    - name: level1
+      toUnlock: []
+      dialogue_passed: 0
+      level_completed: 0
+    - name: level2
+      toUnlock:
+      - level1
+      dialogue_passed: 0
+      level_completed: 0
+    - name: level2_1
+      toUnlock:
+      - level2
+      dialogue_passed: 0
+      level_completed: 0
 --- !u!4 &1168102573
 Transform:
   m_ObjectHideFlags: 0
@@ -42876,6 +42900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39d7b2a15a83a044ad30a71a5a6d444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataManager: {fileID: 1168102572}
   animator: {fileID: 2147424782}
   sounds: {fileID: 2138923333}
   music: {fileID: 458503522}
