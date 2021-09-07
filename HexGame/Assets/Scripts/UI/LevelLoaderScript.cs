@@ -14,7 +14,7 @@ public class LevelLoaderScript : MonoBehaviour
     }
     public void OpenLevel(string level)
     {
-        VarManager.DictionaryClear();
+        VarManager.DictionariesClear();
         StartCoroutine(LoadLevel(level));
     }
 

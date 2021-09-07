@@ -1,15 +1,18 @@
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace CellClasses
-{
-    public class Cell : MonoBehaviour
-    {
-        [Header("Position")]
-        [SerializeField] public int row;
-        [SerializeField] public int col;
 
-        public bool HasDice(/*Dictionary<string,string> dictionary*/)
+namespace Tile
+{
+    [CreateAssetMenu(fileName = "HexGame", menuName = "New Cell")]
+    public class CellObject : ScriptableObject
+    {
+        public int row;
+        public int col;
+        public GameObject gameObject;
+    
+        public bool HasDice()
         {
             return VarManager.Dices.ContainsKey($"{row}_{col}");
         }
@@ -19,11 +22,7 @@ namespace CellClasses
         }
         public virtual void CellPlacement()
         {
-            VarManager.Cells.Add($"{row}_{col}", this);
-        }
-        private void Awake()
-        {
-            CellPlacement();
+            VarManager.CellsObjects.Add($"{row}_{col}", this);
         }
 
         public virtual void CellAction  (){}
@@ -31,6 +30,6 @@ namespace CellClasses
         {
             return true;
         }
-        
     }
 }
+

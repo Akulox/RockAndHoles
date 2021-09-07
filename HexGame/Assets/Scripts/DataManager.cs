@@ -28,14 +28,13 @@ public class DataManager : MonoBehaviour
     public void LoadField()
     {
         string path = Application.persistentDataPath + "/DataPlus.json";
-        path = Application.persistentDataPath + "/DataPlus.json";
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Open);
         
         data = formatter.Deserialize(stream) as Item;
         stream.Close();
     }
-    
+
     [System.Serializable]
     public class Item
     {

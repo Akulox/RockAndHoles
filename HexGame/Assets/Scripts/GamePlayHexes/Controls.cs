@@ -75,13 +75,13 @@ public class Controls : MonoBehaviour
 
     public void Restart()
     {
-        VarManager.DictionaryClear();
+        VarManager.DictionariesClear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Home()
     {
-        VarManager.DictionaryClear();
+        VarManager.DictionariesClear();
         SceneManager.LoadScene("LevelMap");
     }
 }

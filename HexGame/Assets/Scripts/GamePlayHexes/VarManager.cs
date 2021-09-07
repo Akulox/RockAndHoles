@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tile;
 using CellClasses;
 using DiceClasses;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class VarManager : MonoBehaviour
     public static Dictionary<string, Dice> Dices = new Dictionary<string, Dice>();
     public static Dictionary<string, Dice> DicesUPD = new Dictionary<string, Dice>();
     public static Dictionary<string, Cell> Cells = new Dictionary<string, Cell>();
+    public static Dictionary<string, CellObject> CellsObjects = new Dictionary<string, CellObject>();
     public static Dictionary<string, TeleportCell[]> PortalCells = new Dictionary<string, TeleportCell[]>();
     
     public float step = 8f;
@@ -19,7 +21,7 @@ public class VarManager : MonoBehaviour
     static bool _lose = false;
     bool dicesHidden = false;
 
-    public static void DictionaryClear()
+    public static void DictionariesClear()
     {
         Dices.Clear();
         DicesUPD.Clear();
