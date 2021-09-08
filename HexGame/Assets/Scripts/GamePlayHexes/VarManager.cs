@@ -1,32 +1,48 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tile;
 using CellClasses;
 using DiceClasses;
+using GamePlayHexes.Tile;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UI;
 
 public class VarManager : MonoBehaviour
 {
+
+    // CONST
+    // EVENTS
+    // INSPECTORS FIELDS
+    // PRIVATE FIELDS
+    // MONO (Awake, Start, OnDestroy)
+    // PUBLIC METHODS
+    // PRIVATE METHODS
+    // UPDATE, FIXED UPDATE
+    // CALLBACKS
+    
+    
+    [SerializeField] public float step = 8f;
+    
     public static Dictionary<string, Dice> Dices = new Dictionary<string, Dice>();
     public static Dictionary<string, Dice> DicesUPD = new Dictionary<string, Dice>();
     public static Dictionary<string, Cell> Cells = new Dictionary<string, Cell>();
     public static Dictionary<string, CellObject> CellsObjects = new Dictionary<string, CellObject>();
-    public static Dictionary<string, TeleportCell[]> PortalCells = new Dictionary<string, TeleportCell[]>();
-    
-    public float step = 8f;
+
+
     static int _playButtonsCd = 0;
     static bool _playButtonsOn = true;
     static bool _lose = false;
-    bool dicesHidden = false;
+    private bool _dicesHidden = false;
+    
 
     public static void DictionariesClear()
     {
         Dices.Clear();
         DicesUPD.Clear();
         Cells.Clear();
-        PortalCells.Clear();
+    }
+    static void Win()
+    {
+        FindObjectOfType<LevelIntroduce>().StartLevelEnding();
     }
     public static void Lose()
     {
@@ -34,28 +50,14 @@ public class VarManager : MonoBehaviour
         Debug.Log("Вы проиграли");
     }
 
-    static void Win()
-    {
-        FindObjectOfType<LevelIntroduce>().StartLevelEnding();
-    }
-    
-    void HideShowDicesAnimation(bool state)
-    {
-        GameObject.FindGameObjectWithTag("Wizard").transform.GetChild(0).GetComponent<Animator>().SetBool("isHold", state);
-        GameObject.FindGameObjectWithTag("Wizard").transform.GetChild(1).GetComponent<Animator>().SetBool("isHold", state);
-        foreach (var dice in Dices.Values)
-        {
-            dice.HideShowDice(state);
-        }
-    }
     public void HideShowDices()
     {
         if (_playButtonsCd == 0)
         {
             _playButtonsCd = 50;
-            _playButtonsOn = dicesHidden;
-            dicesHidden = !dicesHidden;
-            HideShowDicesAnimation(dicesHidden);
+            _playButtonsOn = _dicesHidden;
+            _dicesHidden = !_dicesHidden;
+            HideShowDicesAnimation(_dicesHidden);
         }
     }
     public static void MakeMove(int dir)
@@ -71,32 +73,17 @@ public class VarManager : MonoBehaviour
                 dice.MakeMove(dir);
                 dice.DiceUpd();
             }
-            
-            //Dice teleportation
-            foreach (var sect in PortalCells.Values)
-            {
-                if (sect[0].HasUpdDice())
-                {
-                    DicesUPD[$"{sect[0].row}_{sect[0].col}"].row = sect[1].row;
-                    DicesUPD[$"{sect[0].row}_{sect[0].col}"].col = sect[1].col;
-                }
-                if (sect[1].HasUpdDice())
-                {
-                    DicesUPD[$"{sect[1].row}_{sect[1].col}"].row = sect[0].row;
-                    DicesUPD[$"{sect[1].row}_{sect[1].col}"].col = sect[0].col;
-                }
-            }
-            
-            //End of move, dictionaries reset
-            Dices = DicesUPD.ToDictionary(entry => entry.Key, entry => entry.Value);
-            DicesUPD.Clear();
+
+            ResetDicePositions();
             
             // Cell action after moving
             foreach (var cell in Cells.Values)
             {
                 cell.CellAction();
             }
-            
+
+            ResetDicePositions();
+
             // Dice action after cell action
             foreach (var dice in Dices.Values)
             {
@@ -120,6 +107,22 @@ public class VarManager : MonoBehaviour
             {
                 Win();
             }
+        }
+    }
+
+    private static void ResetDicePositions()
+    {
+        Dices = DicesUPD.ToDictionary(entry => entry.Key, entry => entry.Value);
+        DicesUPD.Clear();
+    }
+    
+    void HideShowDicesAnimation(bool state)
+    {
+        GameObject.FindGameObjectWithTag("Wizard").transform.GetChild(0).GetComponent<Animator>().SetBool("isHold", state);
+        GameObject.FindGameObjectWithTag("Wizard").transform.GetChild(1).GetComponent<Animator>().SetBool("isHold", state);
+        foreach (var dice in Dices.Values)
+        {
+            dice.HideShowDice(state);
         }
     }
 

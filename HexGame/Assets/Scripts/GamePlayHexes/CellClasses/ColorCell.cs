@@ -5,7 +5,7 @@ namespace CellClasses
         public int colorID;
         public override bool CheckCellProperties()
         {
-            return HasDice() && VarManager.Dices[$"{row}_{col}"].colorID == colorID;
+            return HasDice() && VarManager.Dices[GetCellName()].colorID == colorID;
         }
     }
 }

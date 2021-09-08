@@ -1,8 +1,11 @@
 using UnityEngine.Events;
 
-[System.Serializable]
-public class Question
+namespace UI
 {
-    public string keySentence;
-    public UnityEvent posAns;
+    [System.Serializable]
+    public class Question
+    {
+        public string keySentence;
+        public UnityEvent posAns;
+    }
 }

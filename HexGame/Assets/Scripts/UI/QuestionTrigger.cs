@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class QuestionTrigger : MonoBehaviour
+namespace UI
 {
-    public Question question;
-    
-    public void TriggerQuestion()
+    public class QuestionTrigger : MonoBehaviour
     {
-        FindObjectOfType<QuestionManager>().StartQuestion(question);
+        public Question question;
+
+        public void TriggerQuestion()
+        {
+            FindObjectOfType<QuestionManager>().StartQuestion(question);
+        }
     }
 }

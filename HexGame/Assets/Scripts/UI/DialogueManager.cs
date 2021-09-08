@@ -2,72 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class DialogueManager : MonoBehaviour
+
+namespace UI
 {
-    public Text dialogueText;
-
-    private Queue<string> sentences;
-
-    public Animator dialogueWindowAnimation;
-
-    private UnityEvent _unityEvent;
-
-    
-
-    private void Start()
+    public class DialogueManager : MonoBehaviour
     {
-        
-        sentences = new Queue<string>();
-    }
+        public Text dialogueText;
 
-    public void StartDialogue(Dialogue dialogue, UnityEvent unityEvent)
-    {
-        _unityEvent = unityEvent;
-        
-        MenuCamera.active = false;
-        
-        dialogueWindowAnimation.SetBool("IsOpen", true);
-        
-        sentences.Clear();
-        
-        foreach (string sentence in dialogue.keySentences)
+        private Queue<string> sentences;
+
+        public Animator dialogueWindowAnimation;
+
+        private UnityEvent _unityEvent;
+
+
+
+        private void Start()
         {
-            sentences.Enqueue(GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>().GetLocalizedValue(sentence));
-        }
-        
-        DisplayNextSentence();
-    }
 
-    public void DisplayNextSentence()
-    {
-        if (sentences.Count == 0)
-        {
-            EndDialogue();
-            return;
+            sentences = new Queue<string>();
         }
 
-        string sentence = sentences.Dequeue();
-        
-        StopAllCoroutines();
-        StartCoroutine(TypeSentences(sentence));
-    }
-
-    private IEnumerator TypeSentences(string sentence)
-    {
-        dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        public void StartDialogue(Dialogue dialogue, UnityEvent unityEvent)
         {
-            dialogueText.text += letter;
-            yield return null;
-        }
-    }
+            _unityEvent = unityEvent;
 
-    void EndDialogue()
-    {
-        dialogueWindowAnimation.SetBool("IsOpen", false);
-        MenuCamera.active = true;
-        _unityEvent.Invoke();
+            MenuCamera.active = false;
+
+            dialogueWindowAnimation.SetBool("IsOpen", true);
+
+            sentences.Clear();
+
+            foreach (string sentence in dialogue.keySentences)
+            {
+                sentences.Enqueue(GameObject.FindGameObjectWithTag("LocalizationManager")
+                    .GetComponent<LocalizationManager>().GetLocalizedValue(sentence));
+            }
+
+            DisplayNextSentence();
+        }
+
+        public void DisplayNextSentence()
+        {
+            if (sentences.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }
+
+            string sentence = sentences.Dequeue();
+
+            StopAllCoroutines();
+            StartCoroutine(TypeSentences(sentence));
+        }
+
+        private IEnumerator TypeSentences(string sentence)
+        {
+            dialogueText.text = "";
+            foreach (char letter in sentence.ToCharArray())
+            {
+                dialogueText.text += letter;
+                yield return null;
+            }
+        }
+
+        void EndDialogue()
+        {
+            dialogueWindowAnimation.SetBool("IsOpen", false);
+            MenuCamera.active = true;
+            _unityEvent.Invoke();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace CellClasses
         {
             if (HasDice())
             {
-                VarManager.Dices[$"{row}_{col}"].RemoveDice();
+                VarManager.Dices[GetCellName()].RemoveDice();
             }
         }
     }

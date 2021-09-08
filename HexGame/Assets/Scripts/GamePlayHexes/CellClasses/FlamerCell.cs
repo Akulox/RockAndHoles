@@ -10,15 +10,15 @@ namespace CellClasses
         {
             if (fire && HasDice())
             {
-                if (VarManager.Dices[$"{row}_{col}"] is IceDice)
+                if (VarManager.Dices[GetCellName()] is IceDice)
                 {
-                    VarManager.Dices[$"{row}_{col}"].RemoveDice();
+                    VarManager.Dices[GetCellName()].RemoveDice();
                     fire = false;
                     return;
                 }
-                if (VarManager.Dices[$"{row}_{col}"] is ExplosiveDice)
+                if (VarManager.Dices[GetCellName()] is ExplosiveDice)
                 {
-                    VarManager.Dices[$"{row}_{col}"].RemoveDice();
+                    VarManager.Dices[GetCellName()].RemoveDice();
                 }
             }
         }

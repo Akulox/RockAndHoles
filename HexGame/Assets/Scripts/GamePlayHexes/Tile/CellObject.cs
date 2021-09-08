@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
-
-namespace Tile
+namespace GamePlayHexes.Tile
 {
     [CreateAssetMenu(fileName = "HexGame", menuName = "New Cell")]
     public class CellObject : ScriptableObject

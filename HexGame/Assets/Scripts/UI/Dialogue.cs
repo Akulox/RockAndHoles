@@ -1,7 +1,9 @@
-using UnityEngine;
-
-[System.Serializable]
-public class Dialogue
+namespace UI
 {
-    public string[] keySentences;
+    [System.Serializable]
+    public class Dialogue
+    {
+        public string[] keySentences;
+    }
 }
+

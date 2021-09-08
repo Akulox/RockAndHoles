@@ -1,34 +1,37 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelLoaderScript : MonoBehaviour
+namespace UI
 {
-    public Animator transition;
-    public float transitionTime = 1f;
-    
-    public void Restart()
+    public class LevelLoaderScript : MonoBehaviour
     {
-        OpenLevel(SceneManager.GetActiveScene().name);
-    }
-    public void OpenLevel(string level)
-    {
-        VarManager.DictionariesClear();
-        StartCoroutine(LoadLevel(level));
-    }
+        public Animator transition;
+        public float transitionTime = 1f;
 
-    IEnumerator LoadLevel(string level)
-    {
-        transition.SetTrigger("Start");
+        public void Restart()
+        {
+            OpenLevel(SceneManager.GetActiveScene().name);
+        }
 
-        yield return new WaitForSeconds(transitionTime);
+        public void OpenLevel(string level)
+        {
+            VarManager.DictionariesClear();
+            StartCoroutine(LoadLevel(level));
+        }
 
-        SceneManager.LoadScene(level);
-    }
+        IEnumerator LoadLevel(string level)
+        {
+            transition.SetTrigger("Start");
 
-    public void QuitLevel()
-    {
-        OpenLevel("LevelMap");
+            yield return new WaitForSeconds(transitionTime);
+
+            SceneManager.LoadScene(level);
+        }
+
+        public void QuitLevel()
+        {
+            OpenLevel("LevelMap");
+        }
     }
 }

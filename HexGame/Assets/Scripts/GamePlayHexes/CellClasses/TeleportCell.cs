@@ -1,20 +1,16 @@
 
+using UnityEngine;
+
 namespace CellClasses
 {
     public class TeleportCell : Cell
     {
-        public int teleportID;
-        public override void CellPlacement()
+        public TeleportCell nextTeleport;
+
+        public override void CellAction()
         {
-            base.CellPlacement();
-            try
-            {
-                VarManager.PortalCells.Add($"{teleportID}", new []{this, null});
-            }
-            catch
-            {
-                VarManager.PortalCells[$"{teleportID}"][1] = this;
-            }
+            GetDice()?.SetDicePlacement(nextTeleport.row, nextTeleport.col);
+            base.CellAction();
         }
     }
 }

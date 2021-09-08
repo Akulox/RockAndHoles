@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DialogueTrigger : MonoBehaviour
+namespace UI
 {
-    public Dialogue dialogue;
-    public UnityEvent unityEvent;
-
-    public void TriggerDialogue()
+    public class DialogueTrigger : MonoBehaviour
     {
-        gameObject.GetComponentInParent<DialogueManager>().StartDialogue(dialogue, unityEvent);
+        public Dialogue dialogue;
+        public UnityEvent unityEvent;
+
+        public void TriggerDialogue()
+        {
+            gameObject.GetComponentInParent<DialogueManager>().StartDialogue(dialogue, unityEvent);
+        }
     }
 }

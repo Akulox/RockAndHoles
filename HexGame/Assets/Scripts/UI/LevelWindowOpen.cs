@@ -1,43 +1,44 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelWindowOpen : MonoBehaviour
+namespace UI
 {
-    public DataManager dataManager;
-    
-    public Sprite levelOpened;
-    public Sprite levelClosed;
-    public GameObject levelButton;
-    public Text text;
-    public Animator animator;
-    public DataManager.Level currentLevel;
-    private bool _open;
-    private bool _levelUnlocked;
-
-    public void IsOpen(string level)
+    public class LevelWindowOpen : MonoBehaviour
     {
-        MenuCamera.active = _open;
-        _open = !_open;
-        if (_open)
+        public DataManager dataManager;
+
+        public Sprite levelOpened;
+        public Sprite levelClosed;
+        public GameObject levelButton;
+        public Text text;
+        public Animator animator;
+        public DataManager.Level currentLevel;
+        private bool _open;
+        private bool _levelUnlocked;
+
+        public void IsOpen(string level)
         {
-            currentLevel = dataManager.FindLevelByName(level);
-            _levelUnlocked = dataManager.UnlockedProperties(currentLevel.toUnlock);
-            levelButton.GetComponent<Image>().sprite = _levelUnlocked ? levelOpened : levelClosed;
-            text.text = GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>().GetLocalizedValue(level);
-            
+            MenuCamera.active = _open;
+            _open = !_open;
+            if (_open)
+            {
+                currentLevel = dataManager.FindLevelByName(level);
+                _levelUnlocked = dataManager.UnlockedProperties(currentLevel.toUnlock);
+                levelButton.GetComponent<Image>().sprite = _levelUnlocked ? levelOpened : levelClosed;
+                text.text = GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>()
+                    .GetLocalizedValue(level);
+
+            }
+
+            animator.SetBool("isOpen", _open);
         }
-        animator.SetBool("isOpen", _open);
-    }
 
-    public void OpenLevel()
-    {
-        if (_levelUnlocked)
+        public void OpenLevel()
         {
-            FindObjectOfType<LevelLoaderScript>().OpenLevel(currentLevel.name);
+            if (_levelUnlocked)
+            {
+                FindObjectOfType<LevelLoaderScript>().OpenLevel(currentLevel.name);
+            }
         }
     }
 }

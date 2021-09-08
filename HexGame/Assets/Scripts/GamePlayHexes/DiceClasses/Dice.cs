@@ -17,24 +17,153 @@ namespace DiceClasses
         public int rotation;
         public bool movable = true;
         public bool onFire;
-        
-        
 
-
+        public string GetDiceName()
+        {
+            return $"{row}_{col}";
+        }
         public void DicePlacement()
         {
-            VarManager.Dices.Add($"{row}_{col}", this);
+            VarManager.Dices.Add(GetDiceName(), this);
         }
         public void DiceUpd()
         {
-            VarManager.DicesUPD.Add($"{row}_{col}", this);
+            VarManager.DicesUPD.Add(GetDiceName(), this);
         }
         public virtual void RemoveDice()
         {
-            Destroy(VarManager.Dices[$"{row}_{col}"].gameObject);
-            VarManager.Dices.Remove($"{row}_{col}");
+            Destroy(VarManager.Dices[GetDiceName()].gameObject);
+            VarManager.Dices.Remove(GetDiceName());
+        }
+
+        
+        public bool CanGetCellValue(string key)
+        {
+            return VarManager.Cells.ContainsKey(key);
+        }
+        public bool CanGetDiceValue(string key)
+        {
+            return VarManager.Dices.ContainsKey(key);
         }
         
+        //Move Dice
+
+        public void MoveDiceRow(int r)
+        {
+            row += r;
+        }
+        public void MoveDiceCol(int c)
+        {
+            col += c;
+        }
+        public void MoveDice(int r, int c)
+        {
+            MoveDiceRow(r);
+            MoveDiceCol(c);
+        }
+        public void SetDicePlacement(int r, int c)
+        {
+            row = r;
+            col = c;
+        }
+        
+        public void MakeMove(int dir)
+        {
+            if (movable && !hidden)
+            {
+                if (dir == 0)
+                {
+                    while (true)
+                    {
+                        DiceAnimationPlay("Leap5");
+                        MoveDiceRow(1);
+                        if (!CanGetCellValue(GetDiceName()))
+                            while (CanGetCellValue($"{row - 1}_{col}"))
+                                MoveDiceRow(-1);
+                        if (CanGetDiceValue(GetDiceName()) && !VarManager.Dices[GetDiceName()].movable) continue;
+                        return;
+                    }
+                }
+
+                if (dir == 1)
+                {
+                    while (true)
+                    {
+                        DiceAnimationPlay("Leap4");
+                        MoveDiceCol(-1);
+                        if (!CanGetCellValue(GetDiceName()))
+                            while (CanGetCellValue($"{row}_{col + 1}"))
+                                MoveDiceCol(1);;
+                        if (CanGetDiceValue($"{row}_{col}") && !VarManager.Dices[GetDiceName()].movable) continue;
+                        return;
+                    }
+                }
+
+                if (dir == 2)
+                {
+                    while (true)
+                    {
+                        DiceAnimationPlay("Leap3");
+                        MoveDice(-1,-1);
+                        if (!CanGetCellValue(GetDiceName()))
+                            while (CanGetCellValue($"{row + 1}_{col + 1}"))
+                            {
+                                MoveDice(1,1);
+                            }
+
+                        if (CanGetDiceValue(GetDiceName()) && !VarManager.Dices[GetDiceName()].movable) continue;
+                        return;
+                    }
+                }
+
+                if (dir == 3)
+                {
+                    DiceAnimationPlay("Leap2");
+                    while (true)
+                    {
+                        MoveDiceRow(-1);
+                        if (!CanGetCellValue(GetDiceName()))
+                            while (CanGetCellValue($"{row + 1}_{col}"))
+                                MoveDiceRow(1);
+                        if (CanGetDiceValue(GetDiceName()) && !VarManager.Dices[GetDiceName()].movable) continue;
+                        return;
+                    }
+                }
+
+                if (dir == 4)
+                {
+                    DiceAnimationPlay("Leap1");
+                    while (true)
+                    {
+                        MoveDiceCol(1);
+                        if (!CanGetCellValue(GetDiceName()))
+                            while (CanGetCellValue($"{row}_{col - 1}"))
+                                MoveDiceCol(-1);
+                        if (CanGetDiceValue(GetDiceName()) && !VarManager.Dices[GetDiceName()].movable) continue;
+                        return;
+                    }
+                }
+
+                if (dir == 5)
+                {
+                    DiceAnimationPlay("Leap0");
+                    while (true)
+                    {
+                        MoveDice(1,1);
+                        if (!CanGetCellValue(GetDiceName()))
+                            while (CanGetCellValue($"{row - 1}_{col - 1}"))
+                            {
+                                MoveDice(-1,-1);
+                            }
+                        if (CanGetDiceValue(GetDiceName()) && !VarManager.Dices[GetDiceName()].movable) continue;
+                        return;
+                    }
+                }
+            }
+        }
+        
+        #region AnimationShit_ReplacementRequired
+
         public void DiceAnimationTick()
         {
             if (_animationActive != null) 
@@ -62,12 +191,12 @@ namespace DiceClasses
                 || _animationActive == "Leap3" 
                 || _animationActive == "Leap4" 
                 || _animationActive == "Leap5"
-                ))
+            ))
             {
                 transform.position = new Vector3(
-                    VarManager.Cells[$"{row}_{col}"].transform.position.x, 
-                    VarManager.Cells[$"{row}_{col}"].transform.position.y, 
-                    VarManager.Cells[$"{row}_{col}"].transform.position.z);
+                    VarManager.Cells[GetDiceName()].transform.position.x, 
+                    VarManager.Cells[GetDiceName()].transform.position.y, 
+                    VarManager.Cells[GetDiceName()].transform.position.z);
                 transform.rotation = Quaternion.AngleAxis(rotation * 60, Vector3.up);
                 return;
             }
@@ -82,116 +211,8 @@ namespace DiceClasses
                 return;
             }
         }
-        public bool CanGetCellValue(string key)
-        {
-            return VarManager.Cells.ContainsKey(key);
-        }
-        public bool CanGetDiceValue(string key)
-        {
-            return VarManager.Dices.ContainsKey(key);
-        }
-        
-        //Move Dice
-        public void MakeMove(int dir)
-        {
-            if (movable && !hidden)
-            {
-                if (dir == 0)
-                {
-                    while (true)
-                    {
-                        DiceAnimationPlay("Leap5");
-                        row++;
-                        if (!CanGetCellValue($"{row}_{col}"))
-                            while (CanGetCellValue($"{row - 1}_{col}"))
-                                row--;
-                        if (CanGetDiceValue($"{row}_{col}") && !VarManager.Dices[$"{row}_{col}"].movable) continue;
-                        return;
-                    }
-                }
 
-                if (dir == 1)
-                {
-                    while (true)
-                    {
-                        DiceAnimationPlay("Leap4");
-                        col--;
-                        if (!CanGetCellValue($"{row}_{col}"))
-                            while (CanGetCellValue($"{row}_{col + 1}"))
-                                col++;
-                        if (CanGetDiceValue($"{row}_{col}") && !VarManager.Dices[$"{row}_{col}"].movable) continue;
-                        return;
-                    }
-                }
-
-                if (dir == 2)
-                {
-                    while (true)
-                    {
-                        DiceAnimationPlay("Leap3");
-                        row--;
-                        col--;
-                        if (!CanGetCellValue($"{row}_{col}"))
-                            while (CanGetCellValue($"{row + 1}_{col + 1}"))
-                            {
-                                row++;
-                                col++;
-                            }
-
-                        if (CanGetDiceValue($"{row}_{col}") && !VarManager.Dices[$"{row}_{col}"].movable) continue;
-                        return;
-                    }
-                }
-
-                if (dir == 3)
-                {
-                    DiceAnimationPlay("Leap2");
-                    while (true)
-                    {
-                        row--;
-                        if (!CanGetCellValue($"{row}_{col}"))
-                            while (CanGetCellValue($"{row + 1}_{col}"))
-                                row++;
-                        if (CanGetDiceValue($"{row}_{col}") && !VarManager.Dices[$"{row}_{col}"].movable) continue;
-                        return;
-                    }
-                }
-
-                if (dir == 4)
-                {
-                    DiceAnimationPlay("Leap1");
-                    while (true)
-                    {
-                        col++;
-                        if (!CanGetCellValue($"{row}_{col}"))
-                            while (CanGetCellValue($"{row}_{col - 1}"))
-                                col--;
-                        if (CanGetDiceValue($"{row}_{col}") && !VarManager.Dices[$"{row}_{col}"].movable) continue;
-                        return;
-                    }
-                }
-
-                if (dir == 5)
-                {
-                    DiceAnimationPlay("Leap0");
-                    while (true)
-                    {
-                        row++;
-                        col++;
-                        if (!CanGetCellValue($"{row}_{col}"))
-                            while (CanGetCellValue($"{row - 1}_{col - 1}"))
-                            {
-                                row--;
-                                col--;
-                            }
-
-                        if (CanGetDiceValue($"{row}_{col}") && !VarManager.Dices[$"{row}_{col}"].movable) continue;
-                        return;
-                    }
-                }
-            }
-        }
-
+        #endregion
         public void HideShowDice(bool state)
         {
             if (movable) DiceAnimationPlay(state ? "Up" : "Down");

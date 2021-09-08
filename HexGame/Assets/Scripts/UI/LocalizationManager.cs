@@ -1,108 +1,125 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Net.Mime;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class LocalizationManager : MonoBehaviour
+namespace UI
 {
-    public DataManager dataManager;
-    
-    private Dictionary<string, string> localizedText;
+    public class LocalizationManager : MonoBehaviour
+    {
+        public DataManager dataManager;
 
-    public delegate void ChangeLangText();
-    public event ChangeLangText OnLanguageChanged;
-    public Animator animator;
-    
-    void Awake()
-    {
-        dataManager.LoadField();
-        LoadLocalizedText(dataManager.data.language);
-    }
-    
-    public void ChangeLang(string lang)
-    {
-        dataManager.data.language = lang;
-        dataManager.SaveField();
-        LoadLocalizedText(lang);
-    }
-    public void IsOpen(bool isOpen)
-    {
-        animator.SetBool("isOpen", isOpen);
-        if (!dataManager.data.first_dialogue_passed) GameObject.FindGameObjectWithTag("GameStarter").GetComponent<GameIntroduce>().LangChosen();
-    }
-    public void LoadLocalizedText(string langName)
-    {
-        string path = Application.streamingAssetsPath + "/Languages/" + langName + ".json";
-        string dataAsJson;
- 
-        if (Application.platform == RuntimePlatform.Android)
+        private Dictionary<string, string> localizedText;
+
+        public delegate void ChangeLangText();
+
+        public event ChangeLangText OnLanguageChanged;
+        public Animator animator;
+
+        void Awake()
         {
-            var reader = new WWW(path);
-            while (!reader.isDone) { }
- 
-            dataAsJson = reader.text;
+            dataManager.LoadField();
+            LoadLocalizedText(dataManager.data.language);
         }
-        else
+
+        public void ChangeLang(string lang)
         {
-            dataAsJson = File.ReadAllText(path);
+            dataManager.data.language = lang;
+            dataManager.SaveField();
+            LoadLocalizedText(lang);
         }
-        localizedText = JSONLanguageParser(dataAsJson);
 
-        dataManager.data.language = langName;
-
-        OnLanguageChanged?.Invoke();
-    }
- 
-    public string GetLocalizedValue(string key)
-    {
-        if (localizedText.ContainsKey(key))
+        public void IsOpen(bool isOpen)
         {
-            return localizedText[key];
-        } 
-        throw new Exception("Localized text with key \"" + key + "\" not found");
-    }
+            animator.SetBool("isOpen", isOpen);
+            if (!dataManager.data.first_dialogue_passed)
+                GameObject.FindGameObjectWithTag("GameStarter").GetComponent<GameIntroduce>().LangChosen();
+        }
 
-    private Dictionary<string, string> JSONLanguageParser(string dataAsJSON)
-    {
-        Dictionary<string,string> file = new Dictionary<string,string>();
-        int state = 0;
-        string key = "";
-        string value = "";
-        
-        foreach (char letter in dataAsJSON)
+        public void LoadLocalizedText(string langName)
         {
-            if (state == 0)
+            string path = Application.streamingAssetsPath + "/Languages/" + langName + ".json";
+            string dataAsJson;
+
+            if (Application.platform == RuntimePlatform.Android)
             {
-                if (letter == '"') state++;
-                continue;
-            }
-            if (state == 1)
-            {
-                if (letter != '"') { key += letter;
-                    continue;
-                }
-                state++;
-                continue;
-            }
-            if (state == 2)
-            {
-                if (letter == '"') state++;
-                continue;
-            }
-            if (state == 3)
-            {
-                if (letter != '"')
+                var reader = new WWW(path);
+                while (!reader.isDone)
                 {
-                    value += letter;
+                }
+
+                dataAsJson = reader.text;
+            }
+            else
+            {
+                dataAsJson = File.ReadAllText(path);
+            }
+
+            localizedText = JSONLanguageParser(dataAsJson);
+
+            dataManager.data.language = langName;
+
+            OnLanguageChanged?.Invoke();
+        }
+
+        public string GetLocalizedValue(string key)
+        {
+            if (localizedText.ContainsKey(key))
+            {
+                return localizedText[key];
+            }
+
+            throw new Exception("Localized text with key \"" + key + "\" not found");
+        }
+
+        private Dictionary<string, string> JSONLanguageParser(string dataAsJSON)
+        {
+            Dictionary<string, string> file = new Dictionary<string, string>();
+            int state = 0;
+            string key = "";
+            string value = "";
+
+            foreach (char letter in dataAsJSON)
+            {
+                if (state == 0)
+                {
+                    if (letter == '"') state++;
                     continue;
                 }
-                file.Add(key, value);
-                key = value = "";
-                state = 0;
+
+                if (state == 1)
+                {
+                    if (letter != '"')
+                    {
+                        key += letter;
+                        continue;
+                    }
+
+                    state++;
+                    continue;
+                }
+
+                if (state == 2)
+                {
+                    if (letter == '"') state++;
+                    continue;
+                }
+
+                if (state == 3)
+                {
+                    if (letter != '"')
+                    {
+                        value += letter;
+                        continue;
+                    }
+
+                    file.Add(key, value);
+                    key = value = "";
+                    state = 0;
+                }
             }
+
+            return file;
         }
-        return file;
     }
 }

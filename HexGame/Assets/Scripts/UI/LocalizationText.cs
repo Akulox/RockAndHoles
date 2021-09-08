@@ -1,49 +1,57 @@
 using UnityEngine;
 using UnityEngine.UI;
- 
-public class LocalizationText : MonoBehaviour
-{
-    [SerializeField]
-    private string key;
- 
-    private LocalizationManager localizationManager;
-    private Text text;
- 
-    void Awake()
-    {
-        if (localizationManager == null)
-        {
-            localizationManager = GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>();
-        }
-        if (text == null)
-        {
-            text = GetComponent<Text>();
-        }
-        localizationManager.OnLanguageChanged += UpdateText;
-    }
- 
-    void Start()
-    {
-        UpdateText();
-    }
- 
-    private void OnDestroy()
-    {
-        localizationManager.OnLanguageChanged -= UpdateText;
-    }
 
-    private void UpdateText()
+namespace UI
+{
+    public class LocalizationText : MonoBehaviour
     {
-        if (gameObject == null) return;
- 
-        if(localizationManager == null)
+        [SerializeField] private string key;
+
+        private LocalizationManager localizationManager;
+        private Text text;
+
+        void Awake()
         {
-            localizationManager = GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>();
+            if (localizationManager == null)
+            {
+                localizationManager = GameObject.FindGameObjectWithTag("LocalizationManager")
+                    .GetComponent<LocalizationManager>();
+            }
+
+            if (text == null)
+            {
+                text = GetComponent<Text>();
+            }
+
+            localizationManager.OnLanguageChanged += UpdateText;
         }
-        if (text == null)
+
+        void Start()
         {
-            text = GetComponent<Text>();
+            UpdateText();
         }
-        text.text = localizationManager.GetLocalizedValue(key);
+
+        private void OnDestroy()
+        {
+            localizationManager.OnLanguageChanged -= UpdateText;
+        }
+
+        private void UpdateText()
+        {
+            if (gameObject == null) return;
+
+            if (localizationManager == null)
+            {
+                localizationManager = GameObject.FindGameObjectWithTag("LocalizationManager")
+                    .GetComponent<LocalizationManager>();
+            }
+
+            if (text == null)
+            {
+                text = GetComponent<Text>();
+            }
+
+            text.text = localizationManager.GetLocalizedValue(key);
+        }
     }
 }
