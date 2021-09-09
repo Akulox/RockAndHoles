@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -42,7 +41,7 @@ public class DataManager : MonoBehaviour
         public bool noAds;
         public bool sounds;
         public bool music;
-        public bool first_dialogue_passed;
+        public bool firstDialoguePassed;
         public Level[] levels;
     }
     
@@ -51,8 +50,8 @@ public class DataManager : MonoBehaviour
     { 
         public string name;
         public string[] toUnlock;
-        public bool dialogue_passed;
-        public bool level_completed;
+        public bool dialoguePassed;
+        public bool levelCompleted;
     }
     
     public bool UnlockedProperties(string[] levels)
@@ -60,7 +59,10 @@ public class DataManager : MonoBehaviour
         bool unlock = true;
         foreach (var level in levels)
         {
-            if (FindLevelByName(level) != null) unlock &= FindLevelByName(level).level_completed;
+            if (FindLevelByName(level) != null)
+            {
+                unlock &= FindLevelByName(level).levelCompleted;
+            }
         }
         return unlock;
     }

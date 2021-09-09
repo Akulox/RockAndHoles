@@ -32,7 +32,7 @@ namespace UI
         public void IsOpen(bool isOpen)
         {
             animator.SetBool("isOpen", isOpen);
-            if (!dataManager.data.first_dialogue_passed)
+            if (!dataManager.data.firstDialoguePassed)
                 GameObject.FindGameObjectWithTag("GameStarter").GetComponent<GameIntroduce>().LangChosen();
         }
 

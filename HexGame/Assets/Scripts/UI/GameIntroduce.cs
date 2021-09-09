@@ -14,7 +14,7 @@ namespace UI
 
         private void Start()
         {
-            if (!dataManager.data.first_dialogue_passed)
+            if (!dataManager.data.firstDialoguePassed)
             {
                 MenuCamera.active = false;
                 StartCoroutine(WaitFor(1f, delegate { lang.SetBool("isOpen", true); }));
@@ -34,7 +34,7 @@ namespace UI
 
         public void FirstDialoguePassed()
         {
-            dataManager.data.first_dialogue_passed = true;
+            dataManager.data.firstDialoguePassed = true;
             dataManager.SaveField();
         }
     }

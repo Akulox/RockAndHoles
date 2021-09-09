@@ -12,7 +12,7 @@ namespace UI
 
         private void Start()
         {
-            if (!dataManager.data.levels[SceneManager.GetActiveScene().buildIndex - 1].dialogue_passed)
+            if (!dataManager.data.levels[SceneManager.GetActiveScene().buildIndex - 1].dialoguePassed)
             {
                 StartCoroutine(WaitFor(0.5f, delegate { startDialogue?.Invoke(); }));
             }
@@ -21,7 +21,7 @@ namespace UI
 
         public void EndLevelIntroduce()
         {
-            dataManager.data.levels[SceneManager.GetActiveScene().buildIndex - 1].dialogue_passed = true;
+            dataManager.data.levels[SceneManager.GetActiveScene().buildIndex - 1].dialoguePassed = true;
             dataManager.SaveField();
             ToPrepare(true);
         }
@@ -37,7 +37,7 @@ namespace UI
 
         public void StartLevelEnding()
         {
-            dataManager.data.levels[SceneManager.GetActiveScene().buildIndex - 1].level_completed = true;
+            dataManager.data.levels[SceneManager.GetActiveScene().buildIndex - 1].levelCompleted = true;
             dataManager.SaveField();
             ToPrepare(false);
             StartCoroutine(WaitFor(0.5f, delegate { endDialogue.Invoke(); }));
