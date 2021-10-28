@@ -1,10 +1,12 @@
-using DiceClasses;
-
-public class GoodDices : Dice
+namespace GamePlayHexes.DiceClasses
 {
-    public override void RemoveDice()
-    {
-        VarManager.Lose();
-        base.RemoveDice();
-    }
+    public class GoodDices : Dice
+        {
+            public override void RemoveDice()
+            {
+                VarManager.Lose();
+                base.RemoveDice();
+            }
+        }
 }
+    

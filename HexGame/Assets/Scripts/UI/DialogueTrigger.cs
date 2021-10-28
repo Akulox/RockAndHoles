@@ -10,7 +10,17 @@ namespace UI
 
         public void TriggerDialogue()
         {
-            gameObject.GetComponentInParent<DialogueManager>().StartDialogue(dialogue, unityEvent);
+            GameObject.FindGameObjectWithTag((dialogue.isGameInstruction ? "Tip" : "Dialogue") + "Manager").GetComponent<DialogueManager>().StartDialogue(dialogue, unityEvent);
+        }
+
+        public void TriggerLevelStartEnding()
+        {
+            GameObject.FindGameObjectWithTag("LevelStarter").GetComponent<LevelStarter>().EndLevelIntroduce();
+        }
+
+        public void Home()
+        {
+            GameObject.FindGameObjectWithTag("SceneController").GetComponent<SceneController>().Home();
         }
     }
 }

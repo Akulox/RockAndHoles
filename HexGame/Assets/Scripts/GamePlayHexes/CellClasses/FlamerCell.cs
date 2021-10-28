@@ -1,5 +1,6 @@
+using GamePlayHexes.DiceClasses;
 
-namespace CellClasses
+namespace GamePlayHexes.CellClasses
 {
     
     public class FlamerCell : Cell

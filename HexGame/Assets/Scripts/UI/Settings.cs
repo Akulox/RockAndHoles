@@ -18,6 +18,7 @@ namespace UI
 
         private void Start()
         {
+            dataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<DataManager>();
             sounds.GetComponent<Image>().sprite = dataManager.data.sounds ? soundOn : soundOff;
             music.GetComponent<Image>().sprite = dataManager.data.music ? musicOn : musicOff;
         }

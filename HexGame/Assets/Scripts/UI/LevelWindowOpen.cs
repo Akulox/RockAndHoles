@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI
 {
     public class LevelWindowOpen : MonoBehaviour
     {
+        public SceneController sceneController;
         public DataManager dataManager;
 
         public Sprite levelOpened;
@@ -12,32 +15,32 @@ namespace UI
         public GameObject levelButton;
         public Text text;
         public Animator animator;
-        public DataManager.Level currentLevel;
-        private bool _open;
+        public static DataManager.Level currentLevel;
         private bool _levelUnlocked;
 
-        public void IsOpen(string level)
+        public void Open(int level)
         {
-            MenuCamera.active = _open;
-            _open = !_open;
-            if (_open)
-            {
-                currentLevel = dataManager.FindLevelByName(level);
-                _levelUnlocked = dataManager.UnlockedProperties(currentLevel.toUnlock);
-                levelButton.GetComponent<Image>().sprite = _levelUnlocked ? levelOpened : levelClosed;
-                text.text = GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>()
-                    .GetLocalizedValue(level);
-
-            }
-
-            animator.SetBool("isOpen", _open);
+            MenuCamera.active = false;
+            currentLevel = dataManager.FindLevelById(level);
+            _levelUnlocked = dataManager.UnlockedProperties(currentLevel.toUnlock);
+            levelButton.GetComponent<Image>().sprite = _levelUnlocked ? levelOpened : levelClosed;
+            text.text = GameObject.FindGameObjectWithTag("LocalizationManager").GetComponent<LocalizationManager>()
+                .GetLocalizedValue(currentLevel.name);
+            animator.SetBool("isOpen", true);
+        }
+        public void Close()
+        {
+            MenuCamera.active = true;
+            animator.SetBool("isOpen", false);
         }
 
         public void OpenLevel()
         {
             if (_levelUnlocked)
             {
-                FindObjectOfType<LevelLoaderScript>().OpenLevel(currentLevel.name);
+                SceneController.CurrentScene = currentLevel.id + SceneController.levelCountStart;
+                sceneController.OpenLevel();
+                animator.SetBool("isOpen", false);
             }
         }
     }

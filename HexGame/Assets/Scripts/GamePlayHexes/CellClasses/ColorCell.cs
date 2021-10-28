@@ -1,4 +1,4 @@
-namespace CellClasses
+namespace GamePlayHexes.CellClasses
 {
     public class ColorCell : Cell
     {

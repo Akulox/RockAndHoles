@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using CellClasses;
-using DiceClasses;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LevelDataManager : MonoBehaviour
 {

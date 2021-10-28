@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UI;
 
 public class DataManager : MonoBehaviour
 {
@@ -47,32 +48,26 @@ public class DataManager : MonoBehaviour
     
     [System.Serializable]
     public class Level
-    { 
+    {
         public string name;
-        public string[] toUnlock;
+        public int id;
+        public int[] toUnlock;
         public bool dialoguePassed;
         public bool levelCompleted;
     }
     
-    public bool UnlockedProperties(string[] levels)
+    public bool UnlockedProperties(int[] levels)
     {
         bool unlock = true;
         foreach (var level in levels)
         {
-            if (FindLevelByName(level) != null)
-            {
-                unlock &= FindLevelByName(level).levelCompleted;
-            }
+            unlock &= FindLevelById(level).levelCompleted;
         }
         return unlock;
     }
     
-    public Level FindLevelByName(string requiredLevel)
+    public Level FindLevelById(int requiredLevel)
     {
-        foreach (var level in data.levels)
-        {
-            if (requiredLevel == level.name) return level;
-        }
-        return data.levels[0];
+        return data.levels[requiredLevel];
     }
 }

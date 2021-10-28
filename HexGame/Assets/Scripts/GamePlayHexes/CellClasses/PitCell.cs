@@ -1,5 +1,5 @@
 
-namespace CellClasses
+namespace GamePlayHexes.CellClasses
 {
     public class PitCell : Cell
     {

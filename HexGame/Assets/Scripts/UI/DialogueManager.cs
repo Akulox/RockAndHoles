@@ -16,11 +16,12 @@ namespace UI
 
         private UnityEvent _unityEvent;
 
+        private string currentSentence;
+
 
 
         private void Start()
         {
-
             sentences = new Queue<string>();
         }
 
@@ -34,10 +35,12 @@ namespace UI
 
             sentences.Clear();
 
+            LocalizationManager localizationManager = GameObject.FindGameObjectWithTag("LocalizationManager")
+                .GetComponent<LocalizationManager>();
+
             foreach (string sentence in dialogue.keySentences)
             {
-                sentences.Enqueue(GameObject.FindGameObjectWithTag("LocalizationManager")
-                    .GetComponent<LocalizationManager>().GetLocalizedValue(sentence));
+                sentences.Enqueue(localizationManager.GetLocalizedValue(sentence));
             }
 
             DisplayNextSentence();
@@ -51,10 +54,21 @@ namespace UI
                 return;
             }
 
-            string sentence = sentences.Dequeue();
+            currentSentence = sentences.Dequeue();
 
             StopAllCoroutines();
-            StartCoroutine(TypeSentences(sentence));
+            StartCoroutine(TypeSentences(currentSentence));
+        }
+
+        public void Skip()
+        {
+            if (dialogueText.text == currentSentence)
+            {
+                DisplayNextSentence();
+                return;
+            }
+            StopAllCoroutines();
+            dialogueText.text = currentSentence;
         }
 
         private IEnumerator TypeSentences(string sentence)

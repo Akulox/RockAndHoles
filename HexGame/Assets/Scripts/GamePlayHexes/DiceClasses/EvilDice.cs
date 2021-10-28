@@ -1,9 +1,11 @@
-using DiceClasses;
-
-public class EvilDice : Dice
+namespace GamePlayHexes.DiceClasses
 {
-    public override bool CheckDiceProperties()
+    public class EvilDice : Dice
     {
-        return false;
+        public override bool CheckDiceProperties()
+        {
+            return false;
+        }
     }
 }
+

@@ -26,7 +26,7 @@ namespace UI
             StartCoroutine(WaitFor(0.5f, delegate { firstDialogue.TriggerDialogue(); }));
         }
 
-        public IEnumerator WaitFor(float time, Action func)
+        public static IEnumerator WaitFor(float time, Action func)
         {
             yield return new WaitForSeconds(time);
             func.Invoke();

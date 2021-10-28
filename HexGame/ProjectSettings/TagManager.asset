@@ -10,6 +10,12 @@ TagManager:
   - GameData
   - GameStarter
   - Wizard
+  - SceneController
+  - Camera
+  - LevelUI
+  - StartDialogue
+  - EndDialogue
+  - LevelStarter
   layers:
   - Default
   - TransparentFX

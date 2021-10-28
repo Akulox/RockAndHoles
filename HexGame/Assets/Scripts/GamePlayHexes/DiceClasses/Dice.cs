@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DiceClasses
+namespace GamePlayHexes.DiceClasses
 {
     public class Dice : MonoBehaviour
     {

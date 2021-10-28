@@ -1,21 +1,23 @@
-using DiceClasses;
-
-public class ExplosiveDice : Dice
+namespace GamePlayHexes.DiceClasses
 {
-    public readonly int[,] Directions = {{1, 0}, {1, 1}, {0, 1}, {-1, 0}, {-1, -1}, {0, -1}}; 
-    public override void RemoveDice()
+    public class ExplosiveDice : Dice
     {
-        if (onFire)
+        public readonly int[,] Directions = {{1, 0}, {1, 1}, {0, 1}, {-1, 0}, {-1, -1}, {0, -1}}; 
+        public override void RemoveDice()
         {
-            for (int d = 0; d < 6; d++)
+            if (onFire)
             {
-                if (CanGetDiceValue($"{row + Directions[d, 0]}_{col + Directions[d, 1]}"))
+                for (int d = 0; d < 6; d++)
                 {
-                    VarManager.Dices[$"{row + Directions[d, 0]}_{col + Directions[d, 1]}"].onFire = true;
-                    VarManager.Dices[$"{row + Directions[d, 0]}_{col + Directions[d, 1]}"].RemoveDice();
+                    if (CanGetDiceValue($"{row + Directions[d, 0]}_{col + Directions[d, 1]}"))
+                    {
+                        VarManager.Dices[$"{row + Directions[d, 0]}_{col + Directions[d, 1]}"].onFire = true;
+                        VarManager.Dices[$"{row + Directions[d, 0]}_{col + Directions[d, 1]}"].RemoveDice();
+                    }
                 }
             }
+            base.RemoveDice();
         }
-        base.RemoveDice();
     }
 }
+

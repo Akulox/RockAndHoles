@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using DiceClasses;
+using GamePlayHexes.DiceClasses;
 using UnityEngine;
 
-namespace CellClasses
+namespace GamePlayHexes.CellClasses
 {
     public class Cell : MonoBehaviour
     {
@@ -24,7 +23,7 @@ namespace CellClasses
             return null;
         }
 
-        public string GetCellName()
+        protected string GetCellName()
         {
             return $"{row}_{col}";
         }

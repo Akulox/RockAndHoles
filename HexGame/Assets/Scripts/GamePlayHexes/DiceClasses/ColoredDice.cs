@@ -1,6 +1,9 @@
-using DiceClasses;
 
-public class ColoredDice : Dice
+namespace GamePlayHexes.DiceClasses
 {
-    
+    public class ColoredDice : Dice
+    {
+        
+    }
 }
+

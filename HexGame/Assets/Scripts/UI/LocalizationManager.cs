@@ -18,6 +18,7 @@ namespace UI
 
         void Awake()
         {
+            dataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<DataManager>();
             dataManager.LoadField();
             LoadLocalizedText(dataManager.data.language);
         }

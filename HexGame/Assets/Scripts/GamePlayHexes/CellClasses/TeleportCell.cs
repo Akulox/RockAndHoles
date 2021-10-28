@@ -1,7 +1,4 @@
-
-using UnityEngine;
-
-namespace CellClasses
+namespace GamePlayHexes.CellClasses
 {
     public class TeleportCell : Cell
     {
