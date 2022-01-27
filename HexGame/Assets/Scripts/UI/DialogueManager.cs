@@ -16,8 +16,13 @@ namespace UI
 
         private UnityEvent _unityEvent;
 
+<<<<<<< Updated upstream
 
 
+=======
+        private string currentSentence;
+        
+>>>>>>> Stashed changes
         private void Start()
         {
 
@@ -51,7 +56,15 @@ namespace UI
                 return;
             }
 
+<<<<<<< Updated upstream
             string sentence = sentences.Dequeue();
+=======
+            currentSentence = sentences.Dequeue();
+            
+            StopAllCoroutines();
+            StartCoroutine(TypeSentences(currentSentence));
+        }
+>>>>>>> Stashed changes
 
             StopAllCoroutines();
             StartCoroutine(TypeSentences(sentence));
