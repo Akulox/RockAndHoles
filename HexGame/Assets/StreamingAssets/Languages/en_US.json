@@ -3,18 +3,21 @@
   "no" : "No",
   "music": "Music",
   "sounds": "Sounds",
-  "noAds": "Remove Ads",
+  "noAds": "Remove ads",
   "language": "Language",
   "eng": "English",
   "rus": "Russian",
-  "languageChose": "Choose language",
+  "languageChose": "Choose your language",
   "exit": "Exit",
   "tapToContinue": "Tap to continue...",
 
-  "questionNoAds": "Do you want to buy the premium version without ads?",
-  "questionExit": "Do you want to quit the game?",
+  "questionNoAds": "Do you want to upgrade to the premium version without ads?",
+  "questionExit": "Do you want to leave the game?",
 
-  "tipMoveCamera": "Drag to move around the map",
+  "tipMoveCamera": "Move around the map using swaps.",
+  "tipJoystickMove": "Press the button on the hexagonal pad to move all the boulders according to the application.",
+  "tipJoystickRotate": "Click and rotate the hexagon panel to change the viewing angle.",
+  "tipMidButton": "Click on the center button to hide/show cobblestones",
   
   "level1": "First meeting",
   "level2": "Simple solution",
@@ -66,11 +69,21 @@
   "level20_4": "Name",
   "level20_5": "Name",
   "level20_6": "Name",
-  
-  
 
-  "dialogueFirst1": "Oh, you are already here!",
-  "dialogueFirst2": "Is everything alright??",
-  "dialogueFirst3": "Okay",
-  "dialogueFirst4": "Cool"
+  "dialogueFirst1": "Oh you're already here?",
+  "dialogueFirst2": "I hope you got here without any problems.",
+  "dialogueFirst3": "I would invite you to my house, but we have urgent business ahead of us.",
+  "dialogueFirst4": "You can look around, but then go to the pedestal near the house.",
+
+  "dialogue1Level1": "Here we are at the place. This is a field of magical stones. It is alarmed by the energy that is trying to get out of the ground.",
+  "dialogue2Level1": "This energy creates cracks, which is what we need to fix.",
+  "dialogue3Level1": "We need to place all the boulders available on these faults in order to begin the healing process.",
+  "dialogue4Level1": "You will tell me which way to move them.",
+  "dialogue5Level1": "Well, I hope you get the point. Let's get started!",
+
+  "dialogueEnd1Level1": "Not bad, huh?",
+  "dialogueEnd2Level1": "No reason to relax, we still have a lot to do.",
+  "dialogueEnd3Level1": "Let's go!",
+
+  "test": "Test"
 }

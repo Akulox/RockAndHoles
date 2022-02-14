@@ -2,15 +2,14 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
     public class LocalizationManager : MonoBehaviour
     {
         public DataManager dataManager;
-
         private Dictionary<string, string> localizedText;
-
         public delegate void ChangeLangText();
 
         public event ChangeLangText OnLanguageChanged;
@@ -19,7 +18,6 @@ namespace UI
         void Awake()
         {
             dataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<DataManager>();
-            dataManager.LoadField();
             LoadLocalizedText(dataManager.data.language);
         }
 
@@ -41,25 +39,19 @@ namespace UI
         {
             string path = Application.streamingAssetsPath + "/Languages/" + langName + ".json";
             string dataAsJson;
-
             if (Application.platform == RuntimePlatform.Android)
             {
                 var reader = new WWW(path);
                 while (!reader.isDone)
-                {
-                }
-
+                { }
                 dataAsJson = reader.text;
             }
             else
             {
                 dataAsJson = File.ReadAllText(path);
             }
-
             localizedText = JSONLanguageParser(dataAsJson);
-
             dataManager.data.language = langName;
-
             OnLanguageChanged?.Invoke();
         }
 
